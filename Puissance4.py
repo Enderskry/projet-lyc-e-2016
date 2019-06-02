@@ -7,31 +7,75 @@ Created on Wed May 25 17:16:35 2016
 # from constantesConsole import*
 # from Listes import*
 import os
-import pygame
+import pygame , sys
 from pygame.locals import *
 
 
 pygame.init()
 
-
 ecran  = pygame.display.set_mode((500, 428), RESIZABLE)
+joueur = pygame.image.load('Joueur1.png')
+
 
 image = pygame.image.load('Puissance4.png').convert()
+
+JOUEUR = 0
 
 
 continuer = True
 
+x = 8
+y = 362
+
 while continuer:
-    ecran.blit(image, (0, 0))
+
+    ecran.blit(image,(0,0))
+
+    ecran.blit(joueur,(x,y))
+
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            continuer = False
-    pygame.display.flip()
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
 
-pygame.quit()
+        if x < 8:
+            x=8
+        elif x > 437:
+            x = 437
 
 
-# while pygame.event.wait().type != pygame.QUIT: pass
+        if JOUEUR == 0:
+            joueur = pygame.image.load('Joueur1.png')
+        else:
+            joueur = pygame.image.load('Joueur2.png')
+            y = 365
+
+        if JOUEUR == 0:
+            if event.type == KEYDOWN:
+                if (event.key == pygame.K_LEFT):
+                    joueur
+                    x -= 71.5
+                elif (event.key == pygame.K_RIGHT):
+                    joueur
+                    x += 71.5
+
+                if (event.key == pygame.K_RETURN):
+                    JOUEUR = 2
+        elif JOUEUR == 2:
+            if event.type == KEYDOWN:
+                if (event.key == pygame.K_LEFT):
+                    joueur
+                    x -= 71.5
+                elif (event.key == pygame.K_RIGHT):
+                    joueur
+                    x += 71.5
+
+                if (event.key == pygame.K_RETURN):
+                    JOUEUR = 0
+
+    pygame.display.update()
+
+
 
 # #==============================================================================
 # #     Fichier Listes (vu que les import marchent pas)
